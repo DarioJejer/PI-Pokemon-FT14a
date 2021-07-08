@@ -2,37 +2,51 @@
 const axios = require('axios');
 const { Router } = require('express');
 const router = Router ();
-const {Pokemon, Type } = require('../db.js') 
+const {Pokemon, Type } = require('../db.js') ;
+const {apiUrl} = require('./constans.js');
 
 router.get('/', async (req, res, next) => {
     try{
-        var pokemonsInExternalDb = await axios.get('https://pokeapi.co/api/v2/pokemon/');
-        res.json(pokemonsInExternalDb.data.results);
+        let pokemonsLinksInExtDb = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=2`);
+        pokemonsLinksInExtDb = pokemonsLinksInExtDb.data.results;
+        let pokemonsInExtDb = pokemonsLinksInExtDb.map(async function(p) {
+            return await axios.get(p.url).then(p => p.data);
+        });
+        pokemonsInExtDb = await Promise.all(pokemonsInExtDb);
+        
+        FEPokemons = pokemonsInExtDb.map(p => { 
+            return {
+                name: p.name, 
+                img: p.sprites.other['official-artwork'].front_default, 
+                type: p.types.map(t => t.type.name) 
+            }   
+        });
+        return res.json(FEPokemons);        
     }catch(error){
-        console.log('error.message');
+        console.log(error);
     }    
 });
 
 router.post('/', async (req, res, next) => {
     // const {name, hp, attack, defense, height, weight} = req.body;
     try{
-        await Type.create({
+        var fuegoId = await Type.create({
             name: 'fuego'
         })
-        await Type.create({
+        var aguaId = await Type.create({
             name: 'agua'
         })
 
-        var fuegoId = await Type.findOne({
-            where: {
-                name: 'fuego'
-            }
-        })
-        var aguaId = await Type.findOne({
-            where: {
-                name: 'agua'
-            }
-        })
+        // var fuegoId = await Type.findOne({
+        //     where: {
+        //         name: 'fuego'
+        //     }
+        // })
+        // var aguaId = await Type.findOne({
+        //     where: {
+        //         name: 'agua'
+        //     }
+        // })
 
         const newPokemon = await Pokemon.create({
             name: 'pikachu',
@@ -46,11 +60,17 @@ router.post('/', async (req, res, next) => {
 
         await newPokemon.setTypes([fuegoId, aguaId]);
 
-        res.status(201).send('success');
+        var result = await Pokemon.findOne({
+            where: {
+                name: 'pikachu'
+            },
+            include: Type
+        })
+        res.status(201).json(result);
 
     }catch(error){
         console.log(error);
-        res.status(404).send('failed');
+        res.status(404).json(result);
     }    
 })
 
