@@ -6,7 +6,7 @@ const {Pokemon, Type } = require('../db.js') ;
 const getPokemonById = async (id) => {
     let targetPokemon;
     if(!id.match(/^[A-Za-z]+$/)){
-        let pokemonInExtDb = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`).then(p => p.data);
+        const pokemonInExtDb = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`).then(p => p.data);
         targetPokemon =  {
             id: pokemonInExtDb.id,
             name: pokemonInExtDb.name, 
@@ -57,7 +57,7 @@ const getPokemonByName = async (name) => {
             include: Type
     })
     if(!targetPokemon){
-        let pokemonInExtDb = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`).then(p => p.data);
+        const pokemonInExtDb = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`).then(p => p.data);
         targetPokemon = {
             id: pokemonInExtDb.id,
             name: pokemonInExtDb.name, 

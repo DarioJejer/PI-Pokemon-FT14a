@@ -4,7 +4,8 @@ const { Router } = require('express');
 const router = Router ();
 const {Pokemon, Type } = require('../db.js') ;
 const {apiUrl} = require('./constans.js');
-const {getPokemonById, getAllPokemons, getPokemonByName} = require('../utils/getPokemons.js')
+const {getPokemonById, getAllPokemons, getPokemonByName} = require('../utils/getPokemons.js');
+const { Op } = require('sequelize');
 
 router.get('/', async (req, res, next) => {
     const {name} = req.query;
@@ -18,6 +19,20 @@ router.get('/', async (req, res, next) => {
     }    
 });
 
+router.get('/setUp', async (req, res, next) => {
+    try{
+        await Type.create({
+            name: 'fire'
+        })            
+        await Type.create({
+            name: 'water'
+        })    
+        res.send('success');
+    }catch(error){
+        res.status(400).send(error.message);
+    }    
+}); 
+
 router.get('/:id', async (req, res, next) => {
     const {id} = req.params;
     try{
@@ -27,46 +42,37 @@ router.get('/:id', async (req, res, next) => {
     }    
 }); 
 
+
 router.post('/', async (req, res, next) => {
-    // const {name, hp, attack, defense, height, weight} = req.body;
+    const {name, hp, attack, defense, speed, typesIds, height, weight} = req.body;
     try{
-        var fuegoId = await Type.create({
-            name: 'fuego'
-        })
-        var aguaId = await Type.create({
-            name: 'agua'
-        })
-
-        // var fuegoId = await Type.findOne({
-        //     where: {
-        //         name: 'fuego'
-        //     }
-        // })
-        // var aguaId = await Type.findOne({
-        //     where: {
-        //         name: 'agua'
-        //     }
-        // })
-
         const newPokemon = await Pokemon.create({
-            name: 'inventado',
-            hp: 15,
-            attack: 10,
-            defense: 2,
-            speed: 1,
-            height:2,
-            weight: 5
+            name: name,
+            hp: hp,
+            attack,
+            defense,
+            speed,
+            height,
+            weight
         })
 
-        await newPokemon.setTypes([fuegoId, aguaId]);
-
-        var result = await Pokemon.findOne({
+        const types = await Type.findAll({
             where: {
-                name: 'inventado'
+                id: {
+                    [Op.or]: typesIds
+                }
+            }
+        })
+
+        await newPokemon.setTypes(types);
+
+        const newObj = await Pokemon.findOne({
+            where: {
+                name: name
             },
             include: Type
         })
-        res.status(201).json(result);
+        res.status(201).json(newObj);
 
     }catch(error){
         res.status(400).send(error.message);
