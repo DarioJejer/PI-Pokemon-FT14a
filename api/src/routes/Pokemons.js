@@ -4,6 +4,7 @@ const { Router } = require('express');
 const router = Router ();
 const {Pokemon, Type } = require('../db.js') ;
 const {apiUrl} = require('./constans.js');
+const {getPokemonById} = require('../utils/pokemons.js')
 
 router.get('/', async (req, res, next) => {
     try{
@@ -28,39 +29,12 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
     const {id} = req.params;
-    console.log(id);
-    console.log(typeof id);
     try{
-        let targetPokemon;
-        if(!id.match(/^[A-Za-z]+$/)){
-            console.log(typeof `https://pokeapi.co/api/v2/pokemon/${id}`);
-            let pokemonInExtDb = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`).then(p => p.data);
-            targetPokemon =  {
-                id: pokemonInExtDb.id,
-                name: pokemonInExtDb.name, 
-                img: pokemonInExtDb.sprites.other['official-artwork'].front_default, 
-                types: pokemonInExtDb.types.map(t => t.type),
-                hp: pokemonInExtDb.stats[0].base_stat,
-                attack: pokemonInExtDb.stats[1].base_stat,
-                defense: pokemonInExtDb.stats[2].base_stat,
-                speed: pokemonInExtDb.stats[5].base_stat,
-                height: pokemonInExtDb.height, 
-                weight: pokemonInExtDb.weight
-            }   
-        }
-        else{
-            targetPokemon = Pokemon.findOne({
-                    where: {
-                        id: id
-                    },
-                    include: Type
-            })
-        }        
-        return res.json(targetPokemon);        
+        return res.json(await getPokemonById(id));        
     }catch(error){
         res.status(400).send(error.message);
     }    
-});
+}); 
 
 router.post('/', async (req, res, next) => {
     // const {name, hp, attack, defense, height, weight} = req.body;
