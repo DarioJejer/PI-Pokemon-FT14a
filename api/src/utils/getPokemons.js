@@ -1,7 +1,7 @@
 
 const axios = require('axios');
 const {Pokemon, Type } = require('../db.js') ;
-
+const {apiUrl} = require('../utils/constans.js');
 
 const getPokemonById = async (id) => {
     let targetPokemon;
@@ -36,7 +36,7 @@ const getAllPokemons = async () => {
     const pokemonsInExtDbProms = pokemonsLinksInExtDb.map(async function(p) {
         return axios.get(p.url).then(p => p.data);
     });
-    pokemonsInExtDb = await Promise.all(pokemonsInExtDbProms);
+    const pokemonsInExtDb = await Promise.all(pokemonsInExtDbProms);
     
     const FEPokemons = pokemonsInExtDb.map(p => { 
         return {

@@ -1,9 +1,6 @@
-// const router = require('express').Router();
-const axios = require('axios');
 const { Router } = require('express');
 const router = Router ();
-const {Pokemon, Type } = require('../db.js') ;
-const {apiUrl} = require('./constans.js');
+const {Pokemon, Type } = require('../db.js');
 const {getPokemonById, getAllPokemons, getPokemonByName} = require('../utils/getPokemons.js');
 const { Op } = require('sequelize');
 
@@ -19,20 +16,6 @@ router.get('/', async (req, res, next) => {
     }    
 });
 
-router.get('/setUp', async (req, res, next) => {
-    try{
-        await Type.create({
-            name: 'fire'
-        })            
-        await Type.create({
-            name: 'water'
-        })    
-        res.send('success');
-    }catch(error){
-        res.status(400).send(error.message);
-    }    
-}); 
-
 router.get('/:id', async (req, res, next) => {
     const {id} = req.params;
     try{
@@ -42,13 +25,12 @@ router.get('/:id', async (req, res, next) => {
     }    
 }); 
 
-
 router.post('/', async (req, res, next) => {
     const {name, hp, attack, defense, speed, typesIds, height, weight} = req.body;
     try{
         const newPokemon = await Pokemon.create({
-            name: name,
-            hp: hp,
+            name,
+            hp,
             attack,
             defense,
             speed,
