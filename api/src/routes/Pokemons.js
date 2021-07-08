@@ -4,10 +4,14 @@ const { Router } = require('express');
 const router = Router ();
 const {Pokemon, Type } = require('../db.js') ;
 const {apiUrl} = require('./constans.js');
-const {getPokemonById, getAllPokemons} = require('../utils/pokemons.js')
+const {getPokemonById, getAllPokemons, getPokemonByName} = require('../utils/getPokemons.js')
 
 router.get('/', async (req, res, next) => {
+    const {name} = req.query;
     try{
+        if(name){
+            return res.json(await getPokemonByName(name));      
+        }
         return res.json(await getAllPokemons());        
     }catch(error){
         res.status(400).send(error.message);
@@ -45,7 +49,7 @@ router.post('/', async (req, res, next) => {
         // })
 
         const newPokemon = await Pokemon.create({
-            name: 'pikachu',
+            name: 'inventado',
             hp: 15,
             attack: 10,
             defense: 2,
@@ -58,7 +62,7 @@ router.post('/', async (req, res, next) => {
 
         var result = await Pokemon.findOne({
             where: {
-                name: 'pikachu'
+                name: 'inventado'
             },
             include: Type
         })
