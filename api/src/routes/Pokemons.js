@@ -7,10 +7,9 @@ const {apiUrl} = require('./constans.js');
 
 router.get('/', async (req, res, next) => {
     try{
-        let pokemonsLinksInExtDb = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=2`);
-        pokemonsLinksInExtDb = pokemonsLinksInExtDb.data.results;
+        let pokemonsLinksInExtDb = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=12`).then(p => p.data.results);
         let pokemonsInExtDb = pokemonsLinksInExtDb.map(async function(p) {
-            return await axios.get(p.url).then(p => p.data);
+            return axios.get(p.url).then(p => p.data);
         });
         pokemonsInExtDb = await Promise.all(pokemonsInExtDb);
         
@@ -23,7 +22,43 @@ router.get('/', async (req, res, next) => {
         });
         return res.json(FEPokemons);        
     }catch(error){
-        console.log(error);
+        res.status(400).send(error.message);
+    }    
+});
+
+router.get('/:id', async (req, res, next) => {
+    const {id} = req.params;
+    console.log(id);
+    console.log(typeof id);
+    try{
+        let targetPokemon;
+        if(!id.match(/^[A-Za-z]+$/)){
+            console.log(typeof `https://pokeapi.co/api/v2/pokemon/${id}`);
+            let pokemonInExtDb = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`).then(p => p.data);
+            targetPokemon =  {
+                id: pokemonInExtDb.id,
+                name: pokemonInExtDb.name, 
+                img: pokemonInExtDb.sprites.other['official-artwork'].front_default, 
+                types: pokemonInExtDb.types.map(t => t.type),
+                hp: pokemonInExtDb.stats[0].base_stat,
+                attack: pokemonInExtDb.stats[1].base_stat,
+                defense: pokemonInExtDb.stats[2].base_stat,
+                speed: pokemonInExtDb.stats[5].base_stat,
+                height: pokemonInExtDb.height, 
+                weight: pokemonInExtDb.weight
+            }   
+        }
+        else{
+            targetPokemon = Pokemon.findOne({
+                    where: {
+                        id: id
+                    },
+                    include: Type
+            })
+        }        
+        return res.json(targetPokemon);        
+    }catch(error){
+        res.status(400).send(error.message);
     }    
 });
 
@@ -69,8 +104,7 @@ router.post('/', async (req, res, next) => {
         res.status(201).json(result);
 
     }catch(error){
-        console.log(error);
-        res.status(404).json(result);
+        res.status(400).send(error.message);
     }    
 })
 
