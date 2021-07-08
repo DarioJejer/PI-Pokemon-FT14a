@@ -30,6 +30,24 @@ let getPokemonById = async (id) => {
     return targetPokemon;      
 }
 
+let getAllPokemons = async () => {
+    const pokemonsLinksInExtDb = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=12`).then(p => p.data.results);
+    const pokemonsInExtDbProms = pokemonsLinksInExtDb.map(async function(p) {
+        return axios.get(p.url).then(p => p.data);
+    });
+    pokemonsInExtDb = await Promise.all(pokemonsInExtDbProms);
+    
+    const FEPokemons = pokemonsInExtDb.map(p => { 
+        return {
+            name: p.name, 
+            img: p.sprites.other['official-artwork'].front_default, 
+            type: p.types.map(t => t.type.name) 
+        }   
+    });
+    return FEPokemons;
+}
+
 module.exports = {
-    getPokemonById
+    getPokemonById,
+    getAllPokemons
 }
