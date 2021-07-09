@@ -1,9 +1,13 @@
 // import './LandingPage.css';
 import { Link } from 'react-router-dom';
+import NavBar from "../../Components/NavBar/NavBar.jsx";
 
 function Home() {
     return (
-      <h1>This is the Pokemons Page</h1>
+      <>
+        <NavBar />
+        This is the Pokemons Page
+      </>
     );
   }
   
