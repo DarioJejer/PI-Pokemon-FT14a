@@ -1,10 +1,13 @@
 import './App.css';
+import { Route } from "react-router-dom";
+import Home from "./Components/Home.js";
+
 
 function App() {
   return (
-    <div className="App">
-      <h1>Henry Pokemon</h1>
-    </div>
+    <>
+      <Route exact path="/" component={Home} />
+    </>
   );
 }
 
