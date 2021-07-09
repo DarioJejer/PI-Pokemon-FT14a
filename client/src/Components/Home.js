@@ -1,12 +1,13 @@
-import '../App.css';
+import './Home.css';
+import { Link } from 'react-router-dom';
 
 function Home() {
     return (
-      <>
-        <div className="App">
-            <h1>New Henry Pokemon</h1>
-        </div>
-      </>
+      <div className="window">
+        <Link to='/pokemons'>
+          <button className="enterButton">Enter</button>
+        </Link>
+      </div>
     );
   }
   
