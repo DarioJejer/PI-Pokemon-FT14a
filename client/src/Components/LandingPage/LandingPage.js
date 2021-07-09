@@ -1,7 +1,7 @@
 import './LandingPage.css';
 import { Link } from 'react-router-dom';
 
-function Home() {
+function LandingPage() {
     return (
       <div className="window">
         <Link to='/pokemons'>
@@ -11,6 +11,6 @@ function Home() {
     );
   }
   
-export default Home;
+export default LandingPage;
 
 
