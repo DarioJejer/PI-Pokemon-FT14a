@@ -1,0 +1,9 @@
+.box{
+    border: 1px solid black;
+    width: fit-content;
+}
+
+.pokeImg{
+    width: 100px;
+    height: 100px;
+}
