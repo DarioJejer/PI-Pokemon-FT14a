@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 function NavBar() {
     return (
         <div className="navbar">
-            This is the NavBar
+            <Link to="/pokemons">
+                This is the NavBar
+            </Link>
         </div>
     );
   }

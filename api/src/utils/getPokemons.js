@@ -29,9 +29,10 @@ const getAllPokemons = async () => {
     
     const FEPokemons = pokemonsInExtDb.map(p => { 
         return {
+            id: p.id,
             name: p.name, 
             img: p.sprites.other['official-artwork'].front_default, 
-            type: p.types.map(t => t.type.name) 
+            types: p.types.map(t => t.type.name) 
         }   
     });
     return FEPokemons;

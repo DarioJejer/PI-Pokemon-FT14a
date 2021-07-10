@@ -41,7 +41,7 @@ router.post('/', async (req, res, next) => {
         const types = await Type.findAll({
             where: {
                 id: {
-                    [Op.or]: typesIds
+                    [Op.in]: typesIds
                 }
             }
         })

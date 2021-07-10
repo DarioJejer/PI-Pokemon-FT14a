@@ -2,10 +2,10 @@ import './PokemonsCards.css';
 import PokeCard from "../PokeCard/PokeCard.jsx";
 import { connect } from "react-redux";
 
-function PokemonsCards(props) {
+function PokemonsCards(props) { 
     return (
-      <div className="window">
-        {props.pokemons.map(pokemon => <PokeCard pokemon={pokemon}/>)}
+      <div className="window"> 
+        {props.pokemons.map(pokemon => <PokeCard key={pokemon.id} pokemon={pokemon}/>)}
       </div>
     );
   }
