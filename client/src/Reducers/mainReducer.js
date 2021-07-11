@@ -1,4 +1,4 @@
-import { GET_POKEMONS, CREATE_POKEMON } from "../Actions/constans.js";
+import { GET_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON } from "../Actions/constans.js";
 
 const initialState = {
   pokemons: []
@@ -14,7 +14,11 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         pokemons: [...state.pokemons, action.payload]
       });
-
+    case SEARCH_POKEMON:
+      return Object.assign({}, state, {
+        pokemons: state.pokemons.filter(p => p.name.includes(action.payload))
+      });
+  
     default:
       return state;
   }

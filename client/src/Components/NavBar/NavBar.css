@@ -4,4 +4,6 @@
     border-bottom: 2px solid black;
     justify-content: center;
     align-content: center;
+    grid-auto-flow: column;
+    grid-gap: 1rem;
 }
