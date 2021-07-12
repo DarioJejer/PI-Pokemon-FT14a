@@ -1,8 +1,9 @@
-import { GET_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON } from "../Actions/constans.js";
+import { GET_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON, SELECT_POKEMON } from "../Actions/constans.js";
 
 const initialState = {
   pokemons: [],
-  displayPokemons: []
+  displayedPokemons: [],
+  selectedPokemon: {}
 };
 
 export default (state = initialState, action) => {
@@ -10,16 +11,20 @@ export default (state = initialState, action) => {
     case GET_POKEMONS:
       return Object.assign({}, state, {
         pokemons: action.payload,
-        displayPokemons: action.payload
+        displayedPokemons: action.payload
       });
     case CREATE_POKEMON:
       return Object.assign({}, state, {
         pokemons: [...state.pokemons, action.payload],
-        displayPokemons: [...state.pokemons, action.payload]
+        displayedPokemons: [...state.pokemons, action.payload]
       });
     case SEARCH_POKEMON:
       return Object.assign({}, state, {
-        displayPokemons: state.pokemons.filter(p => p.name.includes(action.payload))
+        displayedPokemons: state.pokemons.filter(p => p.name.includes(action.payload))
+      });
+    case SELECT_POKEMON:
+      return Object.assign({}, state, {
+        selectedPokemon: action.payload
       });
   
     default:

@@ -28,31 +28,31 @@ function PokemonForm(props) {
     <div className="form-container">
       <form className="pokemon-form" onSubmit={(e) => handleSubmit(e)}>
         <div className="input-container">
-          <label>Name:</label>
+          <label>Name: </label>
           <input type="text" name="name" value={input.name} onChange={handleInputChange} placeholder="Name" /> 
         </div>
         <div>
-          <label>Hp:</label>
+          <label>Hp: </label>
           <input type="number" name="hp" value={input.hp} onChange={handleInputChange} placeholder="Hp" /> 
         </div>
         <div>
-          <label>Attack:</label>
+          <label>Attack:  </label>
           <input type="number" name="attack" value={input.attack} onChange={handleInputChange} placeholder="Attack" /> 
         </div>
         <div>
-          <label>Defense:</label>
+          <label>Defense:  </label>
           <input type="number" name="defense" value={input.defense} onChange={handleInputChange} placeholder="Defense" /> 
         </div>
         <div>
-          <label>Speed:</label>
+          <label>Speed:  </label>
           <input type="number" name="speed" value={input.speed} onChange={handleInputChange} placeholder="Speed" /> 
         </div>
         <div>
-          <label>Height:</label>
+          <label>Height:  </label>
           <input type="number" name="height" value={input.height} onChange={handleInputChange} placeholder="Height" /> 
         </div>
         <div>
-          <label>Weight:</label>
+          <label>Weight:  </label>
           <input type="number" name="weight" value={input.weight} onChange={handleInputChange} placeholder="Weight" /> 
         </div>
         <input type="submit" value="Agregar" className="btn btn-primary mb-2" />

@@ -1,4 +1,4 @@
-import { GET_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON } from "./constans.js";
+import { GET_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON, SELECT_POKEMON } from "./constans.js";
 import axios from "axios";
 
 export function getPokemons() {
@@ -33,5 +33,16 @@ export function createPokemon(input) {
     }catch(error){
       console.log(error.message);
     }
+  };
+}
+
+
+export function selectPokemon(pokemonId) {
+  return function(dispatch) {    
+    return fetch(`http://localhost:3001/pokemons/${pokemonId}`)
+      .then(response => response.json())
+      .then(json => {
+        dispatch({ type: SELECT_POKEMON, payload: json });
+      });
   };
 }
