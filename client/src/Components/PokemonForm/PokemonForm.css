@@ -23,8 +23,3 @@
     grid-template-columns: repeat(5, minmax(30px,100px));
     gap: 10px;
 }
-
-.checkbox-container{
-    display: grid;
-    justify-items: ;
-}

@@ -1,8 +1,8 @@
-import './PokemonsCards.css';
+import './PokeCards.css';
 import PokeCard from "../PokeCard/PokeCard.jsx";
 import { connect } from "react-redux";
 
-function PokemonsCards(props) { 
+function PokeCards(props) { 
     return (
       <div className="window"> 
         {props.displayedPokemons.map(pokemon => <PokeCard key={pokemon.id} pokemon={pokemon}/>)}
@@ -18,5 +18,5 @@ function PokemonsCards(props) {
   
   export default connect(
     mapStateToProps,
-  )(PokemonsCards);
+  )(PokeCards);
   

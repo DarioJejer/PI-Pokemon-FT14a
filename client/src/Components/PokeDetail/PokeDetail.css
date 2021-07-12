@@ -1,7 +1,13 @@
-.box{
+.details-container{
+    display: grid;
+    justify-content: center;
+    padding-top: 4rem;
+}
+
+.details-card{
     display: grid;
     border: 1px solid black;
-    width: 150px;
+    width: 200px;
     justify-items: center;
     padding: 20px;
 }

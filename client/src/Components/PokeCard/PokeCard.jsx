@@ -7,7 +7,7 @@ function PokeCard({ pokemon }) {
       <div className="box">
         <h3>Name: {pokemon.name}</h3>
         <img src={pokemon.img} alt={pokemon.name} className="pokeImg" />
-        {pokemon.types.map(type => <h3 key={type}> Type: {type} </h3>)}
+        <h3> Type: {pokemon.types.join(", ")} </h3>
       </div>
     </>
   );
