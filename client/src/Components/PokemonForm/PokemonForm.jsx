@@ -12,7 +12,8 @@ function PokemonForm(props) {
     defense: 0,
     speed: 0,
     height: 0,
-    weight: 0
+    weight: 0,
+    typesIds: []
   });
 
   const handleSubmit = (e) => {
@@ -22,6 +23,14 @@ function PokemonForm(props) {
     
   const handleInputChange = function(e) {
     setInput({...input,[e.target.name]: e.target.value}); 
+  }
+
+  const handleTypeSelection = function(e) {
+    if(!input.typesIds.includes(e)){
+      setInput({...input, typesIds: [...input.typesIds, e]});
+    }
+    else
+      setInput({...input, typesIds: input.typesIds.filter(t => t !== e)}); 
   }
 
   return (
@@ -56,7 +65,14 @@ function PokemonForm(props) {
           <input type="number" name="weight" value={input.weight} onChange={handleInputChange} placeholder="Weight" /> 
         </div>
         <div>
-          {props.types.map(t => <div key={t.id}>{t.name}</div>)}
+          {props.types.map(type => {
+            return (
+              <div key={type.id}>
+                <input type="checkbox" id={type.id} name={type.name} value={type.name} onChange={() => handleTypeSelection(type.id)} />                           
+                <label htmlFor={type.id}>{type.name}</label>
+              </div>
+            )
+          })}
         </div>
         <input type="submit" value="Agregar" className="btn btn-primary mb-2" />
       </form>

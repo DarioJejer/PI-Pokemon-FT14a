@@ -29,7 +29,7 @@ export function createPokemon(input) {
   return function(dispatch) {
     try{
       return (
-        axios.post("http://localhost:3001/pokemons", {...input, typesIds: []})      
+        axios.post("http://localhost:3001/pokemons", {...input})      
             .then(newPokemon => {
               let payload = {
                 id: newPokemon.data.id,
