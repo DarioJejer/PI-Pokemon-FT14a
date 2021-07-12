@@ -1,5 +1,15 @@
-import { GET_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON, SELECT_POKEMON } from "./constans.js";
+import { GET_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON, SELECT_POKEMON, GET_TYPES } from "./constans.js";
 import axios from "axios";
+
+export function getTypes() {
+  return function(dispatch) {
+    return fetch("http://localhost:3001/types")
+      .then(response => response.json())
+      .then(json => {
+        dispatch({ type: GET_TYPES, payload: json });
+      });
+  };
+}
 
 export function getPokemons() {
   return function(dispatch) {

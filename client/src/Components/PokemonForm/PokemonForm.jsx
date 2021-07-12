@@ -55,6 +55,9 @@ function PokemonForm(props) {
           <label>Weight:  </label>
           <input type="number" name="weight" value={input.weight} onChange={handleInputChange} placeholder="Weight" /> 
         </div>
+        <div>
+          {props.types.map(t => <div key={t.id}>{t.name}</div>)}
+        </div>
         <input type="submit" value="Agregar" className="btn btn-primary mb-2" />
       </form>
     </div>
@@ -63,7 +66,7 @@ function PokemonForm(props) {
 
 function mapStateToProps(state) {
   return {
-    pokemons: state.pokemons
+    types: state.types
   };
 }  
 

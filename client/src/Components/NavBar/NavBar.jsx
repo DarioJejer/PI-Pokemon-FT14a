@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 function NavBar(props) {
 
     const {push} = useHistory();
-    const displayedPokemons = props.displayedPokemons;
 
     const handleSubmit = (e) => {
         e.preventDefault();
