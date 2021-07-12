@@ -4,15 +4,27 @@
 }
 
 .pokemon-form{
-    width: 300px;
+    width: 500px;
     display: grid;
     grid-gap: 1rem;
     margin: 2rem 0;
-    padding: 1rem 0;
+    padding: 1rem;
     justify-items: center;  
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.60);
     border-radius: .5rem;
 }
 .input-container {
     margin: 1px;
+}
+
+.checkbox-container{
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(5, minmax(30px,100px));
+    gap: 10px;
+}
+
+.checkbox-container{
+    display: grid;
+    justify-items: ;
 }
