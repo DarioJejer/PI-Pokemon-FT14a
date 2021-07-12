@@ -1,22 +1,20 @@
 import './NavBar.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { searchPokemon } from '../../Actions/mainAction';
 import { connect } from "react-redux";
 
 function NavBar(props) {
 
-    const [input, setInput] = useState("");
+    const [selectedPokemonId, setSelectedPokemonId] = useState();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setInput("");
-        props.searchPokemon(input);
     }
+
     const handleChange = (e) => {
-        setInput(e.target.value);
-        console.log(input);
-        props.searchPokemon(input);
+        props.searchPokemon(e.target.value);
+        setSelectedPokemonId(props.displayPokemons[0].id)
     }
 
     return (
@@ -29,10 +27,16 @@ function NavBar(props) {
             </Link>
             <form onSubmit={handleSubmit}>
                 <label>Search: </label>
-                <input type="text" value={input} onChange={handleChange}/>
+                <input type="text" onChange={handleChange}/>
             </form>
         </div>
     );
+  }
+
+  function mapStateToProps(state) {
+    return {
+      displayPokemons: state.displayPokemons
+    };
   }
   
   const mapDispatchToProps = {
@@ -40,7 +44,7 @@ function NavBar(props) {
   }
   
   export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(NavBar);
   

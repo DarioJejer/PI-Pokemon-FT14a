@@ -5,19 +5,16 @@ import { connect } from "react-redux";
 function PokemonsCards(props) { 
     return (
       <div className="window"> 
-        {props.pokemons.map(pokemon => <PokeCard key={pokemon.id} pokemon={pokemon}/>)}
+        {props.displayPokemons.map(pokemon => <PokeCard key={pokemon.id} pokemon={pokemon}/>)}
       </div>
     );
   }
 
-
-
   function mapStateToProps(state) {
     return {
-      pokemons: state.pokemons
+      displayPokemons: state.displayPokemons
     };
   }
-  
   
   export default connect(
     mapStateToProps,
