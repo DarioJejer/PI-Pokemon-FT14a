@@ -1,11 +1,16 @@
 import "./PaginationBar.css";
 import { connect } from "react-redux";
 import { selectPage } from "../../Actions/mainAction";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const PokemonsPerPage = 12;
 
 function PaginationBar(props) { 
+
+    useEffect(() => {
+      setPageNumber(1);
+      props.selectPage(1);
+    }, [props.filteredPokemons])
 
     const [pageNumber, setPageNumber] = useState(1);
     const numOfPagesOnBar = 3;
@@ -18,7 +23,7 @@ function PaginationBar(props) {
 
     const renderPageNumeration = () => {
         let numeration = []
-        props.pokemons.map((_p,i)=> {
+        props.filteredPokemons.map((_p,i)=> {
             if((i)%PokemonsPerPage==0)
                 numeration.push(<button key={i} onClick={()=>handleClick((i/PokemonsPerPage)+1)}>{(i/PokemonsPerPage)+1}</button>);
         })
@@ -66,7 +71,7 @@ const mapDispatchToProps = {
 
 function mapStateToProps(state) {
     return {
-        pokemons: state.pokemons,
+        filteredPokemons: state.filteredPokemons,
     };
   }
   

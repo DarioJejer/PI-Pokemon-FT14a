@@ -3,14 +3,14 @@ import { Route } from "react-router-dom";
 import LandingPage from "./Pages/LandingPage/LandingPage.jsx";
 import Home from "./Pages/Home/Home.jsx";
 import { connect } from "react-redux";
-import { getPokemons, getTypes } from "./Actions/mainAction.js";
+import { setUpPokemons, setUpTypes } from "./Actions/mainAction.js";
 import React, { useEffect } from "react";
 
 function App(props) {
 
   useEffect(() => {
-    props.getPokemons();
-    props.getTypes();
+    props.setUpPokemons();
+    props.setUpTypes();
   });
 
   return (
@@ -22,8 +22,8 @@ function App(props) {
 }
 
 const mapDispatchToProps = {
-  getPokemons,
-  getTypes
+  setUpPokemons,
+  setUpTypes
 };
 
 export default connect(null, mapDispatchToProps)(App);

@@ -1,22 +1,22 @@
-import { GET_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON, SELECT_POKEMON, GET_TYPES, SELECT_PAGE } from "./constans.js";
+import { SET_UP_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON, SELECT_POKEMON, SET_UP_TYPES, SELECT_PAGE } from "./constans.js";
 import axios from "axios";
 
-export function getTypes() {
+export function setUpTypes() {
   return function(dispatch) {
     return fetch("http://localhost:3001/types")
       .then(response => response.json())
       .then(json => {
-        dispatch({ type: GET_TYPES, payload: json });
+        dispatch({ type: SET_UP_TYPES, payload: json });
       });
   };
 }
 
-export function getPokemons() {
+export function setUpPokemons() {
   return function(dispatch) {
     return fetch("http://localhost:3001/pokemons")
       .then(response => response.json())
       .then(json => {
-        dispatch({ type: GET_POKEMONS, payload: json });
+        dispatch({ type: SET_UP_POKEMONS, payload: json });
       });
   };
 }
