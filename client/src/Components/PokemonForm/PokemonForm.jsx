@@ -69,7 +69,7 @@ function PokemonForm(props) {
           {props.types.map(type => {
             return (
               <div key={type.id}>
-                <input type="checkbox" id={type.id} name={type.name} value={type.name} onChange={() => handleTypeSelection(type.id)} />                           
+                <input type="checkbox" id={type.id} name={type.name} value={type.name} checked={input.typesIds.includes(type.id)} onChange={() => handleTypeSelection(type.id)} />                           
                 <label htmlFor={type.id}>{type.name}</label>
               </div>
             )

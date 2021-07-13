@@ -1,4 +1,5 @@
 import { GET_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON, SELECT_POKEMON, GET_TYPES, SELECT_PAGE, selectPokemonsByPage } from "../Actions/constans.js";
+import { PokemonsPerPage } from "../Components/PaginationBar/PaginationBar.jsx";
 
 const initialState = {
   types: [],
@@ -16,7 +17,7 @@ export default (state = initialState, action) => {
     case GET_POKEMONS:
       return Object.assign({}, state, {
         pokemons: action.payload,
-        displayedPokemons: action.payload
+        displayedPokemons: action.payload.slice(0,PokemonsPerPage)
       });
     case CREATE_POKEMON:
       return Object.assign({}, state, {

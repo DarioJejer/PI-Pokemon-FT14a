@@ -21,7 +21,7 @@ const getPokemonById = async (id) => {
 }
 
 const getAllPokemons = async () => {
-    const pokemonsLinksInExtDb = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=12`).then(p => p.data.results);
+    const pokemonsLinksInExtDb = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=48`).then(p => p.data.results);
     const pokemonsInExtDbProms = pokemonsLinksInExtDb.map(async function(p) {
         return axios.get(p.url).then(p => p.data);
     });
