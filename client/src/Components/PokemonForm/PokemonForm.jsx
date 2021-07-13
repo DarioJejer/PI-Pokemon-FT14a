@@ -64,7 +64,7 @@ function PokemonForm(props) {
           <label>Weight:  </label>
           <input type="number" name="weight" value={input.weight} onChange={handleInputChange} placeholder="Weight" /> 
         </div>
-        <text> Types: </text>
+        <p> Types: </p>
         <div className="checkbox-container">
           {props.types.map(type => {
             return (

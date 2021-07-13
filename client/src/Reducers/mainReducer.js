@@ -1,9 +1,9 @@
-import { GET_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON, SELECT_POKEMON, GET_TYPES } from "../Actions/constans.js";
+import { GET_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON, SELECT_POKEMON, GET_TYPES, SELECT_PAGE, selectPokemonsByPage } from "../Actions/constans.js";
 
 const initialState = {
   types: [],
   pokemons: [],
-  displayedPokemons: [],
+  displayedPokemons: [], 
   selectedPokemon: {}
 };
 
@@ -31,7 +31,10 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         selectedPokemon: action.payload
       });
-  
+    case SELECT_PAGE:
+      return Object.assign({}, state, {
+        displayedPokemons: selectPokemonsByPage(state.pokemons, action.payload)
+      });
     default:
       return state;
   }
