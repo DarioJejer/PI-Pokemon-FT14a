@@ -1,27 +1,9 @@
 import './NavBar.css';
-import { Link, useHistory } from 'react-router-dom';
-import { searchPokemon, selectPokemon } from '../../Actions/mainAction';
-import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 import FilterForType from '../FilterForType/FilterForType';
+import SearchBar from '../SearchBar/SearchBar';
 
-function NavBar(props) {
-
-    const {push} = useHistory();
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        e.target.reset();
-        props.searchPokemon("");
-        if(props.displayedPokemons.length !== 0)
-          push("pokemons/selectedPokemon");
-    }
-
-    const handleChange = (e) => {
-        props.searchPokemon(e.target.value);
-        if(props.displayedPokemons.length !== 0)
-          props.selectPokemon(props.displayedPokemons[0].id);
-    }
-
+export default function NavBar() {
     return (
         <div className="navbar">    
             <Link to="/pokemons">
@@ -30,28 +12,9 @@ function NavBar(props) {
             <Link to="/pokemons/createPokemon">
                 Create a Pokemon
             </Link>
-            <form onSubmit={handleSubmit}>
-                <label>Search: </label>
-                <input type="text" onChange={handleChange}/>
-            </form>
+            <SearchBar/>
             <FilterForType/>
         </div>
     );
   }
-
-  function mapStateToProps(state) {
-    return {
-      displayedPokemons: state.displayedPokemons
-    };
-  }
-  
-  const mapDispatchToProps = {
-    searchPokemon,
-    selectPokemon
-  }
-  
-  export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(NavBar);
   
