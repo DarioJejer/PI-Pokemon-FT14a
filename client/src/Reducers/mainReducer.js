@@ -1,4 +1,4 @@
-import { SET_UP_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON, SELECT_POKEMON, SET_UP_TYPES, SELECT_PAGE, selectPokemonsByPage } from "../Actions/constans.js";
+import { SET_UP_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON, SELECT_POKEMON, SET_UP_TYPES, SELECT_PAGE, selectPokemonsByPage, FILTER_BY_TYPE } from "../Actions/constans.js";
 import { PokemonsPerPage } from "../Components/PaginationBar/PaginationBar.jsx";
 
 const initialState = {
@@ -37,6 +37,10 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         displayedPokemons: selectPokemonsByPage(state.filteredPokemons, action.payload)
       });
+    case FILTER_BY_TYPE:
+      return Object.assign({}, state, {
+        filteredPokemons: state.pokemons.filter(p => p.types.includes(action.payload))
+    });
     default:
       return state;
   }

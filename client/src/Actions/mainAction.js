@@ -1,4 +1,4 @@
-import { SET_UP_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON, SELECT_POKEMON, SET_UP_TYPES, SELECT_PAGE } from "./constans.js";
+import { SET_UP_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON, SELECT_POKEMON, SET_UP_TYPES, SELECT_PAGE, FILTER_BY_TYPE } from "./constans.js";
 import axios from "axios";
 
 export function setUpTypes() {
@@ -58,4 +58,8 @@ export function selectPokemon(pokemonId) {
 
 export function selectPage(pageNumber) {
   return { type: SELECT_PAGE, payload: pageNumber }
+}
+
+export function filterPokemonsByType(type) {
+  return { type: FILTER_BY_TYPE, payload: type }
 }

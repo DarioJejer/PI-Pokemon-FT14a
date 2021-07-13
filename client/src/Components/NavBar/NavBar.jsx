@@ -2,6 +2,7 @@ import './NavBar.css';
 import { Link, useHistory } from 'react-router-dom';
 import { searchPokemon, selectPokemon } from '../../Actions/mainAction';
 import { connect } from "react-redux";
+import FilterForType from '../FilterForType/FilterForType';
 
 function NavBar(props) {
 
@@ -33,6 +34,7 @@ function NavBar(props) {
                 <label>Search: </label>
                 <input type="text" onChange={handleChange}/>
             </form>
+            <FilterForType/>
         </div>
     );
   }

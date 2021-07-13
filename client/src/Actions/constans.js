@@ -6,6 +6,7 @@ export const CREATE_POKEMON = "CREATE_POKEMON";
 export const SEARCH_POKEMON = "SEARCH_POKEMON";
 export const SELECT_POKEMON = "SELECT_POKEMON";
 export const SELECT_PAGE = "SELECT_PAGE";
+export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
 
 export const selectPokemonsByPage = (pokemons, pageNumber) => { 
     return pokemons.slice((pageNumber-1)*PokemonsPerPage, pageNumber*PokemonsPerPage);
