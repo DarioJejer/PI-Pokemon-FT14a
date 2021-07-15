@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom';
-import { searchPokemon, selectPokemon } from '../../Actions/mainAction';
+import { resetFilteredPokemons, searchPokemon, selectPokemon } from '../../Actions/mainAction';
 import { connect } from "react-redux";
 
 function SearchBar(props) {
@@ -9,7 +9,7 @@ function SearchBar(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         e.target.reset();
-        props.searchPokemon("");
+        props.resetFilteredPokemons();
         if(props.displayedPokemons.length !== 0)
           push("pokemons/selectedPokemon");
     }
@@ -36,7 +36,8 @@ function SearchBar(props) {
   
   const mapDispatchToProps = {
     searchPokemon,
-    selectPokemon
+    selectPokemon,
+    resetFilteredPokemons
   }
   
   export default connect(
