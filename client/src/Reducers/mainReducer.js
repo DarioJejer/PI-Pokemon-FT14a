@@ -1,4 +1,4 @@
-import { SET_UP_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON, SELECT_POKEMON, SET_UP_TYPES, SELECT_PAGE, selectPokemonsByPage, FILTER_BY_TYPE, ORDER_BY, RESET_FILTERED_POKEMONS } from "../Actions/constans.js";
+import { SET_UP_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON, SELECT_POKEMON, SET_UP_TYPES, SELECT_PAGE, selectPokemonsByPage, FILTER_BY_TYPE, ORDER_BY, RESET_FILTERED_POKEMONS, SET_TYPE_FILTER } from "../Actions/constans.js";
 import { PokemonsPerPage } from "../Components/PaginationBar/PaginationBar.jsx";
 
 const initialState = {
@@ -6,7 +6,12 @@ const initialState = {
   pokemons: [],
   filteredPokemons: [],
   displayedPokemons: [], 
-  selectedPokemon: {}
+  selectedPokemon: {},
+  filtersForPokemons: {
+    name: "",
+    type: "prueba",
+    orderBy: () => {}
+  }
 };
 
 export default (state = initialState, action) => {
@@ -41,6 +46,10 @@ export default (state = initialState, action) => {
     case FILTER_BY_TYPE:
       return Object.assign({}, state, {
         filteredPokemons: state.pokemons.filter(p => p.types.includes(action.payload))
+    });
+    case SET_TYPE_FILTER:
+      return Object.assign({}, state, {
+        filtersForPokemons: {...state.filtersForPokemons, type: action.payload}
     });
     case RESET_FILTERED_POKEMONS:
       return Object.assign({}, state, {

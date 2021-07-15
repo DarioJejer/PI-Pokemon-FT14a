@@ -1,12 +1,14 @@
-import { filterPokemonsByType, resetFilteredPokemons } from '../../Actions/mainAction';
+import { filterPokemonsByType, resetFilteredPokemons, setTypeFilter } from '../../Actions/mainAction';
 import { connect } from "react-redux";
 import { useState } from 'react';
 
 function FilterForType(props) {
 
     const [selectedType, setSelectedType] = useState("");
+    const newSelectedType = props.filtersForPokemons.type;
 
     const handleSelect = (e) => {
+      props.setTypeFilter("normal");
       let selectedType = e.target.value;
       setSelectedType(selectedType);
       
@@ -20,7 +22,7 @@ function FilterForType(props) {
 
     return (
         <div>   
-          <label>Filter by Type:    
+          <label>Filter by Type {newSelectedType}:    
             <select value={selectedType} onChange={handleSelect}>
               <option value="All">All</option>
               {props.types.map(t => {
@@ -34,13 +36,15 @@ function FilterForType(props) {
 
   function mapStateToProps(state) {
     return {
-      types: state.types
+      types: state.types,
+      filtersForPokemons: state.filtersForPokemons
     };
   }
   
   const mapDispatchToProps = {
     filterPokemonsByType,
-    resetFilteredPokemons
+    resetFilteredPokemons,
+    setTypeFilter
   }
   
   export default connect(

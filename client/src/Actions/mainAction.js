@@ -1,7 +1,8 @@
 import { SET_UP_POKEMONS, CREATE_POKEMON, 
   SEARCH_POKEMON, SELECT_POKEMON, SET_UP_TYPES, 
   SELECT_PAGE, FILTER_BY_TYPE, ORDER_BY, 
-  RESET_FILTERED_POKEMONS } from "./constans.js";
+  RESET_FILTERED_POKEMONS, 
+  SET_TYPE_FILTER} from "./constans.js";
 import axios from "axios";
 
 export function setUpTypes() {
@@ -65,6 +66,10 @@ export function selectPage(pageNumber) {
 
 export function filterPokemonsByType(type) {
   return { type: FILTER_BY_TYPE, payload: type }
+}
+
+export function setTypeFilter(type) {
+  return { type: SET_TYPE_FILTER, payload: type }
 }
 
 export function resetFilteredPokemons() {
