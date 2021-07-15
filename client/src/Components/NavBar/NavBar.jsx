@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom';
 import FilterForType from '../FilterForType/FilterForType';
 import SearchBar from '../SearchBar/SearchBar';
 import OrderSelector from '../OrderSelector/OrderSelector';
+import HomeButton from './HomeButton';
 
 export default function NavBar() {
     return (
         <div className="navbar">    
-            <Link to="/pokemons">
-                This is the NavBar
-            </Link>
+            <HomeButton/>
             <Link to="/pokemons/createPokemon">
                 Create a Pokemon
             </Link>
