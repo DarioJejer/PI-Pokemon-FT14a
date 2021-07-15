@@ -1,6 +1,5 @@
-import { filterPokemonsByType, resetFilteredPokemons, setTypeFilter } from '../../Actions/mainAction';
+import { setTypeFilter } from '../../Actions/mainAction';
 import { connect } from "react-redux";
-import { useState } from 'react';
 
 function FilterForType(props) {
 
@@ -31,8 +30,6 @@ function FilterForType(props) {
   }
   
   const mapDispatchToProps = {
-    filterPokemonsByType,
-    resetFilteredPokemons,
     setTypeFilter
   }
   

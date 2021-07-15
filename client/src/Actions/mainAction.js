@@ -2,7 +2,9 @@ import { SET_UP_POKEMONS, CREATE_POKEMON,
   SEARCH_POKEMON, SELECT_POKEMON, SET_UP_TYPES, 
   SELECT_PAGE, FILTER_BY_TYPE, ORDER_BY, 
   RESET_FILTERED_POKEMONS, 
-  SET_TYPE_FILTER} from "./constans.js";
+  SET_TYPE_FILTER,
+  SET_ORDER_BY,
+  SET_POKEMON_SEARCH} from "./constans.js";
 import axios from "axios";
 
 export function setUpTypes() {
@@ -27,6 +29,10 @@ export function setUpPokemons() {
 
 export function searchPokemon(pokemonName) {
   return { type: SEARCH_POKEMON, payload: pokemonName }
+}
+
+export function setPokemonSearch(type) {
+  return { type: SET_POKEMON_SEARCH, payload: type }
 }
 
 export function createPokemon(input) {
@@ -78,4 +84,7 @@ export function resetFilteredPokemons() {
 
 export function orderPokemons(compareFunc) {
   return { type: ORDER_BY, payload: compareFunc }
+}
+export function setOrderPokemonsBy(compareFunc) {
+  return { type: SET_ORDER_BY, payload: compareFunc }
 }

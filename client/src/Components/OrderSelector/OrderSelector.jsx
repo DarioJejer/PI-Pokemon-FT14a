@@ -1,4 +1,4 @@
-import { orderPokemons, resetFilteredPokemons } from '../../Actions/mainAction';
+import { setOrderPokemonsBy } from '../../Actions/mainAction';
 import { connect } from "react-redux";
 import { useState } from 'react';
 
@@ -9,12 +9,7 @@ function OrderSelector(props) {
     const handleSelect = (e) => {
         let selectedOrder = e.target.value;
         setSelectedOrder(selectedOrder);
-        if(selectedOrder === "Default"){
-            props.resetFilteredPokemons();
-        }
-        else{
-            props.orderPokemons(selectFunction(selectedOrder));
-        }
+        props.setOrderPokemonsBy(selectFunction(selectedOrder));
     }
 
     const selectFunction = (targetFunc) => {
@@ -27,6 +22,8 @@ function OrderSelector(props) {
                 return byForceAscen;
             case "byForceDesc":
                 return byForceDesc;
+            default:
+                return maintainOrder;
         }
     } 
 
@@ -50,6 +47,10 @@ function OrderSelector(props) {
         return secondEl.attack - firstEl.attack
     }
 
+    const maintainOrder = (firstEl, secondEl) => {
+        return 0;
+    }
+
     return (
         <div>   
           <form>
@@ -66,19 +67,12 @@ function OrderSelector(props) {
         </div>
     );
   }
-
-  function mapStateToProps(state) {
-    return {
-      types: state.types
-    };
-  }
   
   const mapDispatchToProps = {
-    orderPokemons,
-    resetFilteredPokemons
+    setOrderPokemonsBy
   }
   
   export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
   )(OrderSelector);

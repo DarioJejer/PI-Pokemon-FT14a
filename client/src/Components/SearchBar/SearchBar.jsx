@@ -1,21 +1,21 @@
 import { useHistory } from 'react-router-dom';
-import { resetFilteredPokemons, searchPokemon, selectPokemon } from '../../Actions/mainAction';
+import { selectPokemon, setPokemonSearch } from '../../Actions/mainAction';
 import { connect } from "react-redux";
 
 function SearchBar(props) {
 
     const {push} = useHistory();
+    const input = props.filtersForPokemons.name;
 
     const handleSubmit = (e) => {
         e.preventDefault();
         e.target.reset();
-        props.resetFilteredPokemons();
         if(props.displayedPokemons.length !== 0)
           push("pokemons/selectedPokemon");
     }
 
     const handleChange = (e) => {
-        props.searchPokemon(e.target.value);
+        props.setPokemonSearch(e.target.value);
         if(props.displayedPokemons.length !== 0)
           props.selectPokemon(props.displayedPokemons[0].id);
     }
@@ -23,21 +23,21 @@ function SearchBar(props) {
     return (
         <form onSubmit={handleSubmit}>
             <label>Search: </label>
-            <input type="text" onChange={handleChange}/>
+            <input type="text" value={input} onChange={handleChange}/>
         </form>
     );
   }
 
   function mapStateToProps(state) {
     return {
-      displayedPokemons: state.displayedPokemons
-    };
+      displayedPokemons: state.displayedPokemons,    
+      filtersForPokemons: state.filtersForPokemons
+  };
   }
   
   const mapDispatchToProps = {
-    searchPokemon,
     selectPokemon,
-    resetFilteredPokemons
+    setPokemonSearch
   }
   
   export default connect(
