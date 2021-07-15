@@ -1,22 +1,27 @@
 import { filterPokemonsByType } from '../../Actions/mainAction';
 import { connect } from "react-redux";
+import { useState } from 'react';
 
 function FilterForType(props) {
 
+    const [selectedType, setSelectedType] = useState("");
+
     const handleSelect = (e) => {
-        props.filterPokemonsByType(e.target.value);
+      setSelectedType(e.target.value);
+      props.filterPokemonsByType(e.target.value);
     }
 
     return (
         <div>   
-          <label htmlFor="types">Filter by Type: </label>
-          <select id="types" name="types" onChange={handleSelect}>
-            <option value="none" selected disabled hidden/>
-            <option value="">All</option>
-            {props.types.map(t => {
-              return(<option key={t.id} value={t.name}>{t.name}</option>)
-            })}
-          </select>            
+          <label>Filter by Type:    
+            <select value={selectedType} onChange={handleSelect}>
+              <option value="" disabled hidden/>
+              <option value="">All</option>
+              {props.types.map(t => {
+                return(<option key={t.id} value={t.name}>{t.name}</option>)
+              })}
+            </select>            
+          </label>
         </div>
     );
   }
