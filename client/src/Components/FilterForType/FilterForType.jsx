@@ -16,7 +16,7 @@ function FilterForType(props) {
         props.resetFilteredPokemons();
       }
       else{
-        props.filterPokemonsByType(selectedType);
+        // props.filterPokemonsByType(selectedType);
       }
     }
 
