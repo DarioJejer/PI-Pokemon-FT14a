@@ -48,6 +48,7 @@ export function createPokemon(input) {
       return (
         axios.post("http://localhost:3001/pokemons", {...input})      
             .then(newPokemon => {
+              alert("Tu pokemon fue creado");
               let payload = {
                 id: newPokemon.data.id,
                 name: newPokemon.data.name,
@@ -65,13 +66,13 @@ export function createPokemon(input) {
 export function getCustomPokemons() {
   return { type: GET_CUSTOM_POKEMONS, payload: {} }
 }
-export function selectPokemon(pokemonName) {
+export function selectPokemonByName(pokemonName) {
   return function(dispatch) {    
-    return fetch(`http://localhost:3001/pokemons/?name=${pokemonName}`)
+      return fetch(`http://localhost:3001/pokemons/?name=${pokemonName}`)
       .then(response => response.json())
       .then(json => {
-        dispatch({ type: SELECT_POKEMON, payload: json });
-      });
+          dispatch({ type: SELECT_POKEMON, payload: json });
+        });
   };
 }
 export function selectPage(pageNumber) {

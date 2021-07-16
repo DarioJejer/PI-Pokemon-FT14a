@@ -35,6 +35,7 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         customPokemons: action.payload,
       });
+    
     case CREATE_POKEMON:
       return Object.assign({}, state, {
         customPokemons: [...state.customPokemons, action.payload]
@@ -43,13 +44,10 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         filteredPokemons: [...state.customPokemons]
       });    
+    
     case SELECT_POKEMON:
       return Object.assign({}, state, {
         selectedPokemon: action.payload
-      });
-    case SELECT_PAGE:
-      return Object.assign({}, state, {
-        displayedPokemons: selectPokemonsByPage(state.filteredPokemons, action.payload)
       });
     case SEARCH_POKEMON:
       return Object.assign({}, state, {
@@ -59,6 +57,7 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         filtersForPokemons: {...state.filtersForPokemons, name: action.payload}
       });      
+    
     case FILTER_BY_TYPE:
       return Object.assign({}, state, {
         filteredPokemons: state.filteredPokemons.filter(p => p.types.includes(action.payload))
@@ -67,6 +66,7 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         filtersForPokemons: {...state.filtersForPokemons, type: action.payload}
       });
+    
     case ORDER_BY:
       return Object.assign({}, state, {
         filteredPokemons: [...state.filteredPokemons].sort(action.payload)
@@ -75,10 +75,17 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         filtersForPokemons: {...state.filtersForPokemons, orderBy: action.payload}
       });    
+    
     case RESET_FILTERED_POKEMONS:
       return Object.assign({}, state, {
         filteredPokemons: [...state.pokemons]
       });
+    
+    case SELECT_PAGE:
+      return Object.assign({}, state, {
+        displayedPokemons: selectPokemonsByPage(state.filteredPokemons, action.payload)
+      });
+    
     default:
       return state;
   }

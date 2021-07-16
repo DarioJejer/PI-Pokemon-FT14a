@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import LandingPage from "./Pages/LandingPage/LandingPage.jsx";
 import Home from "./Pages/Home/Home.jsx";
 import { connect } from "react-redux";
@@ -32,8 +32,11 @@ function App(props) {
 
   return (
     <>
+    <Switch>
       <Route exact path="/" component={LandingPage} />
       <Route path ="/pokemons" component={Home} />
+      <Route path="/*" component={LandingPage}></Route>
+    </Switch>
     </>
   );
 }

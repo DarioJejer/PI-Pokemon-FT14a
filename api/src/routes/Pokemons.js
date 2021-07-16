@@ -26,31 +26,21 @@ router.get('/:id', async (req, res, next) => {
 }); 
 
 router.post('/', async (req, res, next) => {
-    const {name, hp, attack, defense, speed, typesIds, height, weight} = req.body;
+    const pokemon = req.body;
     try{
-        const newPokemon = await Pokemon.create({
-            name,
-            hp,
-            attack,
-            defense,
-            speed,
-            height,
-            weight
-        })
-
+        const newPokemon = await Pokemon.create(pokemon);
         const types = await Type.findAll({
             where: {
                 id: {
-                    [Op.in]: typesIds
+                    [Op.in]: pokemon.typesIds
                 }
             }
         })
-
         await newPokemon.setTypes(types);
 
         const newObj = await Pokemon.findOne({
             where: {
-                name: name
+                name: pokemon.name
             },
             include: Type
         })

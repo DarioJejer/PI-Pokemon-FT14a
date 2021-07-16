@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom';
-import { selectPokemon, setPokemonSearch } from '../../Actions/mainAction';
+import { selectPokemonByName, setPokemonSearch } from '../../Actions/mainAction';
 import { connect } from "react-redux";
 
 function SearchBar(props) {
@@ -33,7 +33,7 @@ function SearchBar(props) {
   }
   
   const mapDispatchToProps = {
-    selectPokemon,
+    selectPokemon: selectPokemonByName,
     setPokemonSearch
   }
   

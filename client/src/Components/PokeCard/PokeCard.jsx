@@ -5,12 +5,14 @@ function PokeCard({ pokemon }) {
   return (
     <>
       <div className="box">
-        <h3>Name: {pokemon.name}</h3>
+        <h3>{CFL(pokemon.name)}</h3>
         <img src={pokemon.img} alt={pokemon.name} className="pokeImg" />
         <h3> Type: {pokemon.types.join(", ")} </h3>
       </div>
     </>
   );
 }
+
+const CFL = (name) => name[0].toUpperCase() + name.slice(1);
 
 export default PokeCard;
