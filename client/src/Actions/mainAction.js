@@ -65,9 +65,9 @@ export function createPokemon(input) {
 export function getCustomPokemons() {
   return { type: GET_CUSTOM_POKEMONS, payload: {} }
 }
-export function selectPokemon(pokemonId) {
+export function selectPokemon(pokemonName) {
   return function(dispatch) {    
-    return fetch(`http://localhost:3001/pokemons/${pokemonId}`)
+    return fetch(`http://localhost:3001/pokemons/?name=${pokemonName}`)
       .then(response => response.json())
       .then(json => {
         dispatch({ type: SELECT_POKEMON, payload: json });

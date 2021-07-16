@@ -10,14 +10,12 @@ function SearchBar(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         e.target.reset();
-        if(props.displayedPokemons.length !== 0)
-          push("pokemons/selectedPokemon");
+        props.selectPokemon(input);
+        push("pokemons/selectedPokemon");
     }
 
     const handleChange = (e) => {
         props.setPokemonSearch(e.target.value);
-        if(props.displayedPokemons.length !== 0)
-          props.selectPokemon(props.displayedPokemons[0].id);
     }
 
     return (
@@ -30,8 +28,7 @@ function SearchBar(props) {
 
   function mapStateToProps(state) {
     return {
-      displayedPokemons: state.displayedPokemons,    
-      filtersForPokemons: state.filtersForPokemons
+      filtersForPokemons: state.filtersForPokemons   
   };
   }
   
