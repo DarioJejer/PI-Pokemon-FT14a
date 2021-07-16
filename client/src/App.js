@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import LandingPage from "./Pages/LandingPage/LandingPage.jsx";
 import Home from "./Pages/Home/Home.jsx";
 import { connect } from "react-redux";
-import { filterPokemonsByType, orderPokemons, resetFilteredPokemons, searchPokemon, setUpPokemons, setUpTypes } from "./Actions/mainAction.js";
+import { filterPokemonsByType, orderPokemons, resetFilteredPokemons, searchPokemon, setUpCustomPokemons, setUpPokemons, setUpTypes } from "./Actions/mainAction.js";
 import React, { useEffect } from "react";
 
 function App(props) {
@@ -11,7 +11,8 @@ function App(props) {
   useEffect(() => {
     props.setUpPokemons();
     props.setUpTypes();
-  }, []);
+    props.setUpCustomPokemons();
+  },[]);
 
   useEffect(() => {
 
@@ -47,6 +48,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
   setUpPokemons,
   setUpTypes,
+  setUpCustomPokemons,
   resetFilteredPokemons,
   filterPokemonsByType,
   orderPokemons,

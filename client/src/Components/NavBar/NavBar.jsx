@@ -4,6 +4,7 @@ import FilterForType from '../FilterForType/FilterForType';
 import SearchBar from '../SearchBar/SearchBar';
 import OrderSelector from '../OrderSelector/OrderSelector';
 import HomeButton from './HomeButton';
+import CustomPokemonsButton from './CustomPokemonsButton';
 
 export default function NavBar() {
     return (
@@ -12,9 +13,7 @@ export default function NavBar() {
             <Link to="/pokemons/createPokemon">
                 Create a Pokemon
             </Link>
-            <Link to="/pokemons/customPokemons">
-                Your Pokemons
-            </Link>
+            <CustomPokemonsButton/>
             <SearchBar/>
             <FilterForType/>
             <OrderSelector/>

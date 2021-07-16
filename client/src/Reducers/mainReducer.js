@@ -1,4 +1,7 @@
-import { SET_UP_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON, SELECT_POKEMON, SET_UP_TYPES, SELECT_PAGE, selectPokemonsByPage, FILTER_BY_TYPE, ORDER_BY, RESET_FILTERED_POKEMONS, SET_TYPE_FILTER, SET_ORDER_BY, SET_POKEMON_SEARCH } from "../Actions/constans.js";
+import { SET_UP_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON, 
+  SELECT_POKEMON, SET_UP_TYPES, SELECT_PAGE, selectPokemonsByPage, 
+  FILTER_BY_TYPE, ORDER_BY, RESET_FILTERED_POKEMONS, SET_TYPE_FILTER, 
+  SET_ORDER_BY, SET_POKEMON_SEARCH, GET_CUSTOM_POKEMONS, SET_UP_CUSTOM_POKEMONS } from "../Actions/constans.js";
 import { PokemonsPerPage } from "../Components/PaginationBar/PaginationBar.jsx";
 
 const initialState = {
@@ -7,6 +10,7 @@ const initialState = {
   filteredPokemons: [],
   displayedPokemons: [], 
   selectedPokemon: {},
+  customPokemons: [],
   filtersForPokemons: {
     name: "",
     type: "All",
@@ -27,10 +31,18 @@ export default (state = initialState, action) => {
         displayedPokemons: action.payload.slice(0,PokemonsPerPage),
         selectedPokemon: action.payload[0]
       });
+    case SET_UP_CUSTOM_POKEMONS:
+      return Object.assign({}, state, {
+        customPokemons: action.payload,
+      });
     case CREATE_POKEMON:
       return Object.assign({}, state, {
-        pokemons: [...state.pokemons, action.payload]
+        customPokemons: [...state.customPokemons, action.payload]
       });
+    case GET_CUSTOM_POKEMONS:
+      return Object.assign({}, state, {
+        filteredPokemons: [...state.customPokemons]
+      });    
     case SELECT_POKEMON:
       return Object.assign({}, state, {
         selectedPokemon: action.payload

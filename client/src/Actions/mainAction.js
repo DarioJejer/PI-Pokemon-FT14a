@@ -4,7 +4,9 @@ import { SET_UP_POKEMONS, CREATE_POKEMON,
   RESET_FILTERED_POKEMONS, 
   SET_TYPE_FILTER,
   SET_ORDER_BY,
-  SET_POKEMON_SEARCH} from "./constans.js";
+  SET_POKEMON_SEARCH,
+  GET_CUSTOM_POKEMONS,
+  SET_UP_CUSTOM_POKEMONS} from "./constans.js";
 import axios from "axios";
 
 export function setUpTypes() {
@@ -16,7 +18,6 @@ export function setUpTypes() {
       });
   };
 }
-
 export function setUpPokemons() {
   return function(dispatch) {
     return fetch("http://localhost:3001/pokemons")
@@ -26,15 +27,21 @@ export function setUpPokemons() {
       });
   };
 }
-
+export function setUpCustomPokemons() {
+  return function(dispatch) {
+    return fetch("http://localhost:3001/customPokemons")
+      .then(response => response.json())
+      .then(json => {
+        dispatch({ type: SET_UP_CUSTOM_POKEMONS, payload: json });
+      });
+  };
+}
 export function searchPokemon(pokemonName) {
   return { type: SEARCH_POKEMON, payload: pokemonName }
 }
-
 export function setPokemonSearch(type) {
   return { type: SET_POKEMON_SEARCH, payload: type }
 }
-
 export function createPokemon(input) {
   return function(dispatch) {
     try{
@@ -55,7 +62,9 @@ export function createPokemon(input) {
     }
   };
 }
-
+export function getCustomPokemons() {
+  return { type: GET_CUSTOM_POKEMONS, payload: {} }
+}
 export function selectPokemon(pokemonId) {
   return function(dispatch) {    
     return fetch(`http://localhost:3001/pokemons/${pokemonId}`)
@@ -65,23 +74,18 @@ export function selectPokemon(pokemonId) {
       });
   };
 }
-
 export function selectPage(pageNumber) {
   return { type: SELECT_PAGE, payload: pageNumber }
 }
-
 export function filterPokemonsByType(type) {
   return { type: FILTER_BY_TYPE, payload: type }
 }
-
 export function setTypeFilter(type) {
   return { type: SET_TYPE_FILTER, payload: type }
 }
-
 export function resetFilteredPokemons() {
   return { type: RESET_FILTERED_POKEMONS, payload: {} }
 }
-
 export function orderPokemons(compareFunc) {
   return { type: ORDER_BY, payload: compareFunc }
 }

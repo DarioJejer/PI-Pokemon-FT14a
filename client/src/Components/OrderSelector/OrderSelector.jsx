@@ -54,15 +54,14 @@ function OrderSelector(props) {
     return (
         <div>   
           <form>
-            <label>Order By:               
-                <select value={selectedOrder} onChange={handleSelect}>
-                    <option value="Default">Default</option>
-                    <option value="alphaAscen">Alphabetically ↑</option>
-                    <option value="alphaDesc">Alphabetically ↓</option>
-                    <option value="byForceAscen">By Force ↑</option>
-                    <option value="byForceDesc">By Force ↓</option>
-                </select>            
-            </label>
+            <label>Order By: </label>
+            <select value={selectedOrder} onChange={handleSelect}>
+                <option value="Default">Default</option>
+                <option value="alphaAscen">Alphabetically ↑</option>
+                <option value="alphaDesc">Alphabetically ↓</option>
+                <option value="byForceAscen">By Force ↑</option>
+                <option value="byForceDesc">By Force ↓</option>
+            </select>            
           </form>
         </div>
     );
