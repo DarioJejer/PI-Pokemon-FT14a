@@ -7,6 +7,7 @@ function PokemonForm(props) {
   
   const [input, setInput] = useState({
     name: '',
+    url: '',
     hp: 0,
     attack: 0,
     defense: 0,
@@ -16,8 +17,16 @@ function PokemonForm(props) {
     typesIds: []
   });
 
+  const urlVal = /(https?:\/\/)?([\w\-])+\.{1}([a-zA-Z]{2,63})([\/\w-]*)*\/?\??([^#\n\r]*)?#?([^\n\r]*)/;
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(input.typesIds.length === 0){
+      return alert("Must select at least one type");
+    }
+    if(!urlVal.test(input.url)){
+      return alert("Must enter a valid URL")
+    }
     props.createPokemon(input);
   }
     
@@ -32,37 +41,42 @@ function PokemonForm(props) {
     else
       setInput({...input, typesIds: input.typesIds.filter(t => t !== e)}); 
   }
+  
 
   return (
     <div className="form-container">
       <form className="pokemon-form" onSubmit={(e) => handleSubmit(e)}>
         <div className="input-container">
           <label>Name: </label>
-          <input type="text" name="name" value={input.name} onChange={handleInputChange} placeholder="Name" /> 
+          <input type="text" name="name" value={input.name} onChange={handleInputChange} placeholder="Name" required /> 
+        </div>
+        <div className="input-container">
+          <label>Image Url: </label>
+          <input type="text" name="url" value={input.url} onChange={handleInputChange} placeholder="Url" required /> 
         </div>
         <div>
           <label>Hp: </label>
-          <input type="number" name="hp" value={input.hp} onChange={handleInputChange} placeholder="Hp" /> 
+          <input type="number" name="hp" value={input.hp} min="1" onChange={handleInputChange} placeholder="Hp" /> 
         </div>
         <div>
           <label>Attack:  </label>
-          <input type="number" name="attack" value={input.attack} onChange={handleInputChange} placeholder="Attack" /> 
+          <input type="number" name="attack" value={input.attack}  min="1" onChange={handleInputChange} placeholder="Attack" /> 
         </div>
         <div>
           <label>Defense:  </label>
-          <input type="number" name="defense" value={input.defense} onChange={handleInputChange} placeholder="Defense" /> 
+          <input type="number" name="defense" value={input.defense}  min="1" onChange={handleInputChange} placeholder="Defense" /> 
         </div>
         <div>
           <label>Speed:  </label>
-          <input type="number" name="speed" value={input.speed} onChange={handleInputChange} placeholder="Speed" /> 
+          <input type="number" name="speed" value={input.speed}  min="1" onChange={handleInputChange} placeholder="Speed" /> 
         </div>
         <div>
           <label>Height:  </label>
-          <input type="number" name="height" value={input.height} onChange={handleInputChange} placeholder="Height" /> 
+          <input type="number" name="height" value={input.height}  min="1" onChange={handleInputChange} placeholder="Height" /> 
         </div>
         <div>
           <label>Weight:  </label>
-          <input type="number" name="weight" value={input.weight} onChange={handleInputChange} placeholder="Weight" /> 
+          <input type="number" name="weight" value={input.weight}  min="1" onChange={handleInputChange} placeholder="Weight" /> 
         </div>
         <p> Types: </p>
         <div className="checkbox-container">

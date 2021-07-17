@@ -24,7 +24,7 @@ function PaginationBar(props) {
     const renderPageNumeration = () => {
         let numeration = []
         props.filteredPokemons.map((_p,i)=> {
-            if((i)%PokemonsPerPage==0)
+            if((i)%PokemonsPerPage===0)
                 numeration.push(<button key={i} onClick={()=>handleClick((i/PokemonsPerPage)+1)}>{(i/PokemonsPerPage)+1}</button>);
         })
         totalNumberOfPages = numeration.length;
