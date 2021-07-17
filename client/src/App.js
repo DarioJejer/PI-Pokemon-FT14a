@@ -5,6 +5,7 @@ import Home from "./Pages/Home/Home.jsx";
 import { connect } from "react-redux";
 import { filterPokemonsByType, orderPokemons, resetFilteredPokemons, searchPokemon, setUpCustomPokemons, setUpPokemons, setUpTypes } from "./Actions/mainAction.js";
 import React, { useEffect } from "react";
+import UrlError from "./Pages/UrlError/UrlError";
 
 function App(props) {
 
@@ -35,7 +36,7 @@ function App(props) {
     <Switch>
       <Route exact path="/" component={LandingPage} />
       <Route path ="/pokemons" component={Home} />
-      <Route path="/*" component={LandingPage}></Route>
+      <Route path="/*" component={UrlError}/>
     </Switch>
     </>
   );
