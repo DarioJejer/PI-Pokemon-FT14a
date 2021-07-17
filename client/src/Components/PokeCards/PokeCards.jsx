@@ -4,14 +4,23 @@ import { connect } from "react-redux";
 import PaginationBar from '../PaginationBar/PaginationBar';
 
 function PokeCards(props) { 
+
+    if(props.displayedPokemons.length === 0){
+      return (
+        <div className="loading-gif">
+          <img src="https://art.ngfiles.com/images/1227000/1227695_sinlessshadow_loading.gif?f1586321823"/> 
+        </div>
+        
+      )
+    }
     return (
-      <>
-      <div className="window"> 
-        {props.displayedPokemons.map(pokemon => <PokeCard key={pokemon.id} pokemon={pokemon}/>)}
-      </div>
-      <div> 
-        <PaginationBar/>
-      </div>
+        <>
+        <div className="window"> 
+          {props.displayedPokemons.map(pokemon => <PokeCard key={pokemon.id} pokemon={pokemon}/>)}
+        </div>
+        <div> 
+          <PaginationBar/>
+        </div>
       </>
     );
   }

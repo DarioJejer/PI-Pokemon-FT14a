@@ -10,7 +10,7 @@ function SearchBar(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         e.target.reset();
-        props.selectPokemon(input);
+        props.selectPokemonByName(input);
         push("pokemons/selectedPokemon");
     }
 
@@ -33,7 +33,7 @@ function SearchBar(props) {
   }
   
   const mapDispatchToProps = {
-    selectPokemon: selectPokemonByName,
+    selectPokemonByName,
     setPokemonSearch
   }
   

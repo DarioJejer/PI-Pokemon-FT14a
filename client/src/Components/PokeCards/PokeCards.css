@@ -6,3 +6,9 @@
     justify-items: center;
     gap: 10px;
 }
+
+.loading-gif{
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
