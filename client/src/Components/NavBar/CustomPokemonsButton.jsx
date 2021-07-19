@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom';
-import { setPokemonSearch, setOrderPokemonsBy, setTypeFilter, getCustomPokemons } from '../../Actions/mainAction';
+import { setShowCustomPokemons, resetFilters } from '../../Actions/mainAction';
 import { connect } from "react-redux";
 
 function CustomPokemonsButton(props) {
@@ -7,10 +7,8 @@ function CustomPokemonsButton(props) {
     const {push} = useHistory();
 
     const handleButtonClick = () => {
-        props.setPokemonSearch("");
-        props.setOrderPokemonsBy(()=>{return 0}); 
-        props.setTypeFilter("All");
-        props.getCustomPokemons();
+        props.resetFilters();
+        props.setShowCustomPokemons(true);
         push("/pokemons");
     }
 
@@ -18,12 +16,10 @@ function CustomPokemonsButton(props) {
         <button onClick={handleButtonClick}>Your Pokemons</button>
     );
   }
-  
+
   const mapDispatchToProps = {
-    setPokemonSearch,
-    setOrderPokemonsBy, 
-    setTypeFilter,
-    getCustomPokemons
+    resetFilters,
+    setShowCustomPokemons,
   }
   
   export default connect(

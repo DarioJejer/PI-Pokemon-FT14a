@@ -5,8 +5,10 @@ import { SET_UP_POKEMONS, CREATE_POKEMON,
   SET_TYPE_FILTER,
   SET_ORDER_BY,
   SET_POKEMON_SEARCH,
-  GET_CUSTOM_POKEMONS,
-  SET_UP_CUSTOM_POKEMONS} from "./constans.js";
+  SET_UP_CUSTOM_POKEMONS,
+  RESET_FILTERED_POKEMONS_WITH_CUSTOMS,
+  SET_SHOW_CUSTOM_POKEMONS,
+  RESET_FILTERS} from "./constans.js";
 import axios from "axios";
 
 export function setUpTypes() {
@@ -63,8 +65,8 @@ export function createPokemon(input) {
     }
   };
 }
-export function getCustomPokemons() {
-  return { type: GET_CUSTOM_POKEMONS, payload: {} }
+export function setShowCustomPokemons(value) {
+  return { type: SET_SHOW_CUSTOM_POKEMONS, payload: value }
 }
 export function selectPokemonByName(pokemonName) {
   return function(dispatch) {    
@@ -84,12 +86,18 @@ export function filterPokemonsByType(type) {
 export function setTypeFilter(type) {
   return { type: SET_TYPE_FILTER, payload: type }
 }
-export function resetFilteredPokemons() {
-  return { type: RESET_FILTERED_POKEMONS, payload: {} }
-}
 export function orderPokemons(compareFunc) {
   return { type: ORDER_BY, payload: compareFunc }
 }
 export function setOrderPokemonsBy(compareFunc) {
   return { type: SET_ORDER_BY, payload: compareFunc }
+}
+export function resetFilters() {
+  return { type: RESET_FILTERS, payload: {} }
+}
+export function resetFilteredPokemons() {
+  return { type: RESET_FILTERED_POKEMONS, payload: {} }
+}
+export function resetFilteredPokemonsWithCustoms() {
+  return { type: RESET_FILTERED_POKEMONS_WITH_CUSTOMS, payload: {} }
 }

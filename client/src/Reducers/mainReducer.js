@@ -1,7 +1,7 @@
 import { SET_UP_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON, 
   SELECT_POKEMON, SET_UP_TYPES, SELECT_PAGE, selectPokemonsByPage, 
   FILTER_BY_TYPE, ORDER_BY, RESET_FILTERED_POKEMONS, SET_TYPE_FILTER, 
-  SET_ORDER_BY, SET_POKEMON_SEARCH, GET_CUSTOM_POKEMONS, SET_UP_CUSTOM_POKEMONS } from "../Actions/constans.js";
+  SET_ORDER_BY, SET_POKEMON_SEARCH, SET_UP_CUSTOM_POKEMONS, RESET_FILTERED_POKEMONS_WITH_CUSTOMS, SET_SHOW_CUSTOM_POKEMONS, RESET_FILTERS } from "../Actions/constans.js";
 import { PokemonsPerPage } from "../Components/PaginationBar/PaginationBar.jsx";
 
 const initialState = {
@@ -9,8 +9,9 @@ const initialState = {
   pokemons: [],
   filteredPokemons: [],
   displayedPokemons: [], 
-  selectedPokemon: {},
   customPokemons: [],
+  showCustomPokemons: false,
+  selectedPokemon: {},
   filtersForPokemons: {
     name: "",
     type: "All",
@@ -40,10 +41,10 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         customPokemons: [...state.customPokemons, action.payload]
       });
-    case GET_CUSTOM_POKEMONS:
+    case SET_SHOW_CUSTOM_POKEMONS:
       return Object.assign({}, state, {
-        filteredPokemons: [...state.customPokemons]
-      });    
+        showCustomPokemons: action.payload
+      });
     
     case SELECT_POKEMON:
       return Object.assign({}, state, {
@@ -76,9 +77,21 @@ export default (state = initialState, action) => {
         filtersForPokemons: {...state.filtersForPokemons, orderBy: action.payload}
       });    
     
+    case RESET_FILTERS:
+      return Object.assign({}, state, {
+        filtersForPokemons: {
+          name: "",
+          type: "All",
+          orderBy: () => {return 0}
+        }
+      });
     case RESET_FILTERED_POKEMONS:
       return Object.assign({}, state, {
         filteredPokemons: [...state.pokemons]
+      });
+    case RESET_FILTERED_POKEMONS_WITH_CUSTOMS:
+      return Object.assign({}, state, {
+        filteredPokemons: [...state.customPokemons]
       });
     
     case SELECT_PAGE:

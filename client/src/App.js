@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import LandingPage from "./Pages/LandingPage/LandingPage.jsx";
 import Home from "./Pages/Home/Home.jsx";
 import { connect } from "react-redux";
-import { filterPokemonsByType, orderPokemons, resetFilteredPokemons, searchPokemon, setUpCustomPokemons, setUpPokemons, setUpTypes } from "./Actions/mainAction.js";
+import { filterPokemonsByType, orderPokemons, resetFilteredPokemons, resetFilteredPokemonsWithCustoms, searchPokemon, setUpCustomPokemons, setUpPokemons, setUpTypes } from "./Actions/mainAction.js";
 import React, { useEffect } from "react";
 import UrlError from "./Pages/UrlError/UrlError";
 
@@ -16,9 +16,12 @@ function App(props) {
   },[]);
 
   useEffect(() => {
-
-    props.resetFilteredPokemons();
-
+    if(props.showCustomPokemons){
+      props.resetFilteredPokemonsWithCustoms();
+    }
+    else{
+      props.resetFilteredPokemons();
+    }
     const selectedType = props.filtersForPokemons.type;
     if(selectedType !== "All"){
       props.filterPokemonsByType(selectedType)
@@ -29,7 +32,7 @@ function App(props) {
     const selectedOrder = props.filtersForPokemons.orderBy;
     props.orderPokemons(selectedOrder);
 
-  }, [props.filtersForPokemons])
+  }, [props.filtersForPokemons, props.showCustomPokemons])
 
   return (
     <>
@@ -45,7 +48,8 @@ function App(props) {
 
 function mapStateToProps(state) {
   return {
-    filtersForPokemons: state.filtersForPokemons
+    filtersForPokemons: state.filtersForPokemons,
+    showCustomPokemons: state.showCustomPokemons
   };
 }
 
@@ -54,6 +58,7 @@ const mapDispatchToProps = {
   setUpTypes,
   setUpCustomPokemons,
   resetFilteredPokemons,
+  resetFilteredPokemonsWithCustoms,
   filterPokemonsByType,
   orderPokemons,
   searchPokemon
