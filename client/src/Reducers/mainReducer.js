@@ -1,5 +1,5 @@
 import { SET_UP_POKEMONS, CREATE_POKEMON, SEARCH_POKEMON, 
-  SELECT_POKEMON, SET_UP_TYPES, SELECT_PAGE, selectPokemonsByPage, 
+  SELECT_POKEMON_BY_NAME, SET_UP_TYPES, SELECT_PAGE, selectPokemonsByPage, 
   FILTER_BY_TYPE, ORDER_BY, RESET_FILTERED_POKEMONS, SET_TYPE_FILTER, 
   SET_ORDER_BY, SET_POKEMON_SEARCH, SET_UP_CUSTOM_POKEMONS, RESET_FILTERED_POKEMONS_WITH_CUSTOMS, SET_SHOW_CUSTOM_POKEMONS, RESET_FILTERS } from "../Actions/constans.js";
 import { PokemonsPerPage } from "../Components/PaginationBar/PaginationBar.jsx";
@@ -11,7 +11,7 @@ const initialState = {
   displayedPokemons: [], 
   customPokemons: [],
   showCustomPokemons: false,
-  selectedPokemon: {},
+  selectedPokemon: undefined,
   filtersForPokemons: {
     name: "",
     type: "All",
@@ -30,7 +30,7 @@ export default (state = initialState, action) => {
         pokemons: action.payload,
         filteredPokemons: action.payload,
         displayedPokemons: action.payload.slice(0,PokemonsPerPage),
-        selectedPokemon: action.payload[0]
+        selectedPokemon: undefined
       });
     case SET_UP_CUSTOM_POKEMONS:
       return Object.assign({}, state, {
@@ -46,10 +46,10 @@ export default (state = initialState, action) => {
         showCustomPokemons: action.payload
       });
     
-    case SELECT_POKEMON:
+    case SELECT_POKEMON_BY_NAME:
       return Object.assign({}, state, {
         selectedPokemon: action.payload
-      });
+      });  
     case SEARCH_POKEMON:
       return Object.assign({}, state, {
         filteredPokemons: state.filteredPokemons.filter(p => p.name.includes(action.payload))

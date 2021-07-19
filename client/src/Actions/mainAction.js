@@ -1,5 +1,5 @@
 import { SET_UP_POKEMONS, CREATE_POKEMON, 
-  SEARCH_POKEMON, SELECT_POKEMON, SET_UP_TYPES, 
+  SEARCH_POKEMON, SELECT_POKEMON_BY_NAME, SET_UP_TYPES, 
   SELECT_PAGE, FILTER_BY_TYPE, ORDER_BY, 
   RESET_FILTERED_POKEMONS, 
   SET_TYPE_FILTER,
@@ -71,9 +71,13 @@ export function setShowCustomPokemons(value) {
 export function selectPokemonByName(pokemonName) {
   return function(dispatch) {    
       return fetch(`http://localhost:3001/pokemons/?name=${pokemonName}`)
-      .then(response => response.json())
+      .then(response => {
+        if(response.status === 400){
+          return undefined;
+        }
+        return response.json()})
       .then(json => {
-          dispatch({ type: SELECT_POKEMON, payload: json });
+          dispatch({ type: SELECT_POKEMON_BY_NAME, payload: json });
         });
   };
 }

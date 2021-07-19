@@ -6,7 +6,6 @@ function SearchBar(props) {
 
     const {push} = useHistory();
     const input = props.filtersForPokemons.name;
-
     const handleSubmit = (e) => {
         e.preventDefault();
         e.target.reset();
@@ -28,7 +27,7 @@ function SearchBar(props) {
 
   function mapStateToProps(state) {
     return {
-      filtersForPokemons: state.filtersForPokemons   
+      filtersForPokemons: state.filtersForPokemons
   };
   }
   
