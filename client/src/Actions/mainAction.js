@@ -77,7 +77,12 @@ export function selectPokemonByName(pokemonName) {
         }
         return response.json()})
       .then(json => {
-          json = {...json, types: json.types.map(t => t.name)}
+          let hasCharacter = /.*[a-zA-Z].*/;
+          if(json){
+            if(hasCharacter.test(json.id)){
+              json = {...json, types: json.types.map(t => t.name)}
+            }
+          }
           dispatch({ type: SELECT_POKEMON_BY_NAME, payload: json });
         });
   };
