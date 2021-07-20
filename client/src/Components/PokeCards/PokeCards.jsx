@@ -14,14 +14,14 @@ function PokeCards(props) {
       )
     }
     return (
-        <>
-        <div className="window"> 
+      <div className="poke-cards-window-background">
+        <div className="poke-cards-window"> 
           {props.displayedPokemons.map(pokemon => <PokeCard key={pokemon.id} pokemon={pokemon}/>)}
         </div>
         <div> 
           <PaginationBar/>
         </div>
-      </>
+      </div>
     );
   }
 

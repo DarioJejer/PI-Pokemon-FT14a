@@ -56,13 +56,13 @@ function PaginationBar(props) {
     }
 
   return (
-    <>
+    <div>
       <div className="pagination-bar">
         {renderPrevButton()}
         {renderPageNumeration()}
         {renderNextButton()}
       </div>
-    </>
+    </div>
   );
 }
 const mapDispatchToProps = {

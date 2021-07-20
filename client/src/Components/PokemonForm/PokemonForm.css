@@ -9,6 +9,7 @@
     grid-gap: 1rem;
     margin: 2rem 0;
     padding: 1rem;
+    align-self: flex-start;
     justify-items: center;  
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.60);
     border-radius: .5rem;

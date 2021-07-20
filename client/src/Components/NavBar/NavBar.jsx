@@ -8,12 +8,16 @@ import CustomPokemonsButton from './CustomPokemonsButton';
 
 export default function NavBar() {
     return (
-        <div className="navbar">    
-            <HomeButton/>
-            <Link to="/pokemons/createPokemon">
+        <div className="navbar navbar-font">    
+            <Link to="/pokemons">
+                <HomeButton/>
+            </Link>
+            <Link to="/pokemons/createPokemon" className="link-destyling">
                 Create a Pokemon
             </Link>
-            <CustomPokemonsButton/>
+            <Link to="/pokemons">
+                <CustomPokemonsButton/>
+            </Link>
             <SearchBar/>
             <FilterForType/>
             <OrderSelector/>

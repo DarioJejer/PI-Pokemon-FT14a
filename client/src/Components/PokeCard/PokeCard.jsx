@@ -6,7 +6,9 @@ function PokeCard({ pokemon }) {
     <>
       <div className="box">
         <h3>{CFL(pokemon.name)}</h3>
-        <img src={pokemon.img} alt={pokemon.name} className="pokeImg" />
+        <div className="image-box">
+          <img src={pokemon.img} alt={pokemon.name} className="pokeImg" />
+        </div>
         <h3> {pokemon.types.map(t => CFL(t)).join(` `)} </h3>
       </div>
     </>

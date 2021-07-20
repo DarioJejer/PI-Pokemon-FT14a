@@ -1,19 +1,18 @@
-import { useHistory } from 'react-router-dom';
+import './NavBar.css';
 import { setShowCustomPokemons, resetFilters } from '../../Actions/mainAction';
 import { connect } from "react-redux";
 
 function CustomPokemonsButton(props) {
 
-    const {push} = useHistory();
-
     const handleButtonClick = () => {
         props.resetFilters();
         props.setShowCustomPokemons(true);
-        push("/pokemons");
     }
 
     return (
-        <button onClick={handleButtonClick}>Your Pokemons</button>
+        <button className="custom-pokemons-buttons" onClick={handleButtonClick}>
+          <span>Your Pokemons</span>
+        </button>
     );
   }
 
