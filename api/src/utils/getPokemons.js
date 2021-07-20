@@ -5,18 +5,19 @@ const {apiUrl} = require('../utils/constans.js');
 
 const getPokemonById = async (id) => {
     let targetPokemon;
-    if(!id.match(/^[A-Za-z]+$/)){
-        const pokemonInExtDb = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`).then(p => p.data);
-        targetPokemon = pokemonModelMaper(pokemonInExtDb);
-    }
-    else{
+    let hasCharacter = /.*[a-zA-Z].*/;
+    if(hasCharacter.test(id)){
         targetPokemon = Pokemon.findOne({
                 where: {
                     id: id
                 },
                 include: Type
         })
-    }  
+    }
+    if(!targetPokemon){
+        const pokemonInExtDb = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`).then(p => p.data);
+        targetPokemon = pokemonModelMaper(pokemonInExtDb);
+    }
     return targetPokemon;      
 }
 
