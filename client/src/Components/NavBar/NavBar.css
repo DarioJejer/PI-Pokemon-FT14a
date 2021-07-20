@@ -28,4 +28,9 @@
     font-size: 20px;
     text-shadow: 2px 2px 2px #aaa;
     cursor: pointer;
+    transition: all .3s linear;
+}
+
+.custom-pokemons-buttons:hover{
+    transform: scale(1.05);
 }

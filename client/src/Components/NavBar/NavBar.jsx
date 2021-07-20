@@ -12,7 +12,7 @@ export default function NavBar() {
             <Link to="/pokemons">
                 <HomeButton/>
             </Link>
-            <Link to="/pokemons/createPokemon" className="link-destyling">
+            <Link to="/pokemons/createPokemon" className="link-destyling custom-pokemons-buttons">
                 Create a Pokemon
             </Link>
             <Link to="/pokemons">

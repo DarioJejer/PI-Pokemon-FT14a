@@ -7,10 +7,10 @@ function PokeCards(props) {
 
     if(props.displayedPokemons.length === 0){
       return (
-        <div className="loading-gif">
+        <div className="loading-gif poke-cards-window-background">
           <img src="https://art.ngfiles.com/images/1227000/1227695_sinlessshadow_loading.gif?f1586321823"/> 
+          <PaginationBar/>
         </div>
-        
       )
     }
     return (

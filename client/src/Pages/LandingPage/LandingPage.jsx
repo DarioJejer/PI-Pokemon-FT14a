@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 
 function LandingPage() {
     return (
-      <div className="window">
+      <div className="landing-page">
+        <img src="https://www.freepnglogos.com/uploads/pokemon-logo-text-png-7.png" style={{display:'block', width:'400px'}} alt="pokemon logo text png" />       
         <Link to='/pokemons'>
-          <button className="enterButton">Enter</button>
+          <button className="enter-button">Enter</button>
         </Link>
       </div>
     );
