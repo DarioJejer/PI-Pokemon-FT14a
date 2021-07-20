@@ -15,7 +15,6 @@
     font-weight: 900;
     text-align: center;
     padding: 1em;
-    border-radius: 50%;
     transition: all .3s linear;
 }
 
@@ -35,4 +34,10 @@
     font-weight: 600;
     text-align: center;
     padding: 1.6em;
+    transition: all .3s linear;
+}
+
+.pagination-buttons:hover {
+    color: #ff1744;
+    transform: scale(1.15);
 }

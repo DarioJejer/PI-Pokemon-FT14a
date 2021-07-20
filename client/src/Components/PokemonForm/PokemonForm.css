@@ -1,6 +1,8 @@
 .form-container{
     display: grid;
     justify-content: center;
+    background-image: url("https://cdn2.bulbagarden.net/upload/thumb/d/d3/Professor_Oaks_Laboratory.png/1200px-Professor_Oaks_Laboratory.png");
+    background-size: cover;
 }
 
 .pokemon-form{
@@ -13,6 +15,7 @@
     justify-items: center;  
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.60);
     border-radius: .5rem;
+    background-color: rgba(255,255,255,0.8);
 }
 .input-container {
     margin: 1px;

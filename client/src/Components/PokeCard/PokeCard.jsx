@@ -9,12 +9,12 @@ function PokeCard({ pokemon }) {
         <div className="image-box">
           <img src={pokemon.img} alt={pokemon.name} className="pokeImg" />
         </div>
-        <h3> {pokemon.types.map(t => CFL(t)).join(` `)} </h3>
+        <h3> {pokemon.types.map(t => CFL(t)).join(` - `)} </h3>
       </div>
     </>
   );
 }
 
-const CFL = (name) => name[0].toUpperCase() + name.slice(1);
+export const CFL = (name) => name[0].toUpperCase() + name.slice(1);
 
 export default PokeCard;
