@@ -1,5 +1,6 @@
 .poke-cards-window{
     padding: 4em 10%;
+    height: 700px;
     display: grid;
     justify-content: center;
     justify-items: center;

@@ -4,7 +4,6 @@ const { Pokemon, Type } = require('../db.js');
 
 router.get('/', async (req, res, next) => {
     try{
-
         let pokemonsInDb = await Pokemon.findAll({include: Type})
         let FEPokemons = pokemonsInDb.map(p => { 
             return {

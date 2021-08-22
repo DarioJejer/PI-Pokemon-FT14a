@@ -34,7 +34,7 @@ const getAllPokemons = async () => {
             name: p.name, 
             img: p.sprites.other['official-artwork'].front_default, 
             types: p.types.map(t => t.type.name),
-            attack: p.stats[1].base_stat
+            attack: p.height
         }   
     });
     return FEPokemons;

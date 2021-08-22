@@ -22,8 +22,8 @@ export function setUpTypes() {
 }
 export function setUpPokemons() {
   return function(dispatch) {
-    return fetch("http://localhost:3001/pokemons")
-      .then(response => response.json())
+    return axios.get("/pokemons")
+      .then(response => response.data)
       .then(json => {
         dispatch({ type: SET_UP_POKEMONS, payload: json });
       });
@@ -31,8 +31,8 @@ export function setUpPokemons() {
 }
 export function setUpCustomPokemons() {
   return function(dispatch) {
-    return fetch("http://localhost:3001/customPokemons")
-      .then(response => response.json())
+    return axios.get("/customPokemons")
+      .then(response => response.data)
       .then(json => {
         dispatch({ type: SET_UP_CUSTOM_POKEMONS, payload: json });
       });
@@ -48,7 +48,7 @@ export function createPokemon(input) {
   return function(dispatch) {
     try{
       return (
-        axios.post("http://localhost:3001/pokemons", {...input})      
+        axios.post("/pokemons", {...input})      
             .then(newPokemon => {
               alert("Tu pokemon fue creado");
               let payload = {
@@ -70,12 +70,12 @@ export function setShowCustomPokemons(value) {
 }
 export function selectPokemonByName(pokemonName) {
   return function(dispatch) {    
-      return fetch(`http://localhost:3001/pokemons/?name=${pokemonName}`)
+      return axios.get(`/pokemons/?name=${pokemonName}`)
       .then(response => {
         if(response.status === 400){
           return undefined;
         }
-        return response.json()})
+        return response.data})
       .then(json => {
           let hasCharacter = /.*[a-zA-Z].*/;
           if(json){
